@@ -11,6 +11,17 @@ class Movie(models.Model):
         ratings = Rating.objects.filter(movie=self)
         return len(ratings)
 
+    def avg_rating(self):
+        total = 0
+        ratings = Rating.objects.filter(movie=self)
+        for rating in ratings:
+            total += rating.stars
+
+        if total > 0:
+            return total / len(ratings)
+        else:
+            return 0
+
 
 class Rating(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
