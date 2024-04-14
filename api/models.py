@@ -1,11 +1,22 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
+def get_upload_path(instance, file_name):
+    return os.path.join('images', 'thumbnail', str(instance.pk), file_name)
+
+
 class Movie(models.Model):
     title = models.CharField(max_length=32)
     description = models.TextField(max_length=360)
+    thumbnail = models.ImageField(upload_to=get_upload_path, blank=True, null=True)
+    type = models.CharField(max_length=128, blank=True)
+    trailer_url = models.CharField(max_length=512, blank=True)
+
+    def __str__(self):
+        return self.title
 
     def total_rating(self):
         ratings = Rating.objects.filter(movie=self)
