@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 def get_upload_path(instance, file_name):
-    return os.path.join('images', 'thumbnail', str(instance.pk), file_name)
+    return os.path.join('thumbnail', str(instance.pk), file_name)
 
 
 class Movie(models.Model):
