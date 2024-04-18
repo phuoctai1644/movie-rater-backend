@@ -1,6 +1,6 @@
 from .models import Movie, Rating
 from .serializers import MovieSerializer, RatingSerializer, UserSerializer
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, filters
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.authentication import TokenAuthentication
@@ -19,6 +19,8 @@ class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
     queryset = Movie.objects.all()
     authentication_classes = (TokenAuthentication, )
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title']
 
     @action(detail=True, methods=['POST'])
     def rate_movie(self, request, pk=None):
