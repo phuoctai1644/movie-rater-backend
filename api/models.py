@@ -10,7 +10,7 @@ def get_upload_path(instance, file_name):
 
 class Movie(models.Model):
     title = models.CharField(max_length=32)
-    description = models.TextField(max_length=360)
+    description = models.TextField(max_length=1080)
     year = models.PositiveIntegerField(validators=[MinValueValidator(1900)], blank=True)
     thumbnail = models.ImageField(upload_to=get_upload_path, blank=True, null=True)
     type = models.CharField(max_length=128, blank=True)
