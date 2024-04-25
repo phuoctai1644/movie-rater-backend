@@ -27,16 +27,18 @@ class MovieViewSet(viewsets.ModelViewSet):
         if 'stars' in request.data:
             movie = Movie.objects.get(id=pk)
             stars = request.data['stars']
+            description = request.data['description']
             user = request.user
 
             try:
                 rating = Rating.objects.get(user=user.id, movie=movie.id)
                 rating.stars = stars
+                rating.description = description
                 rating.save()
                 serializer = RatingSerializer(rating, many=False)
                 response = {'message': 'Rating updated', 'data': serializer.data}
             except:
-                rating = Rating.objects.create(user=user, movie=movie, stars=stars)
+                rating = Rating.objects.create(user=user, movie=movie, stars=stars, description=description)
                 serializer = RatingSerializer(rating, many=False)
                 response = {'message': 'Rating created', 'data': serializer.data}
 
