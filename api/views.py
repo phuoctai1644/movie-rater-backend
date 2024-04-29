@@ -14,6 +14,12 @@ class UserViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (AllowAny, )
 
+    @action(detail=False, methods=['GET'])
+    def profile(self, request):
+        user = User.objects.get(id=request.user.id)
+        serializer = UserSerializer(user, many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
