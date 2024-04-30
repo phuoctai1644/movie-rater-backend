@@ -20,6 +20,24 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = UserSerializer(user, many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    def update(self, request, *args, **kwargs):
+        try:
+            user = User.objects.get(id=kwargs['pk'])
+
+            if request.data is None:
+                return Response({'message': 'Missing info!'}, status=status.HTTP_400_BAD_REQUEST)
+
+            user.username = request.data['userName']
+            user.email = request.data['email']
+            user.first_name = request.data['firstName']
+            user.last_name = request.data['lastName']
+            user.save()
+            serializer = UserSerializer(user, many=False)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except:
+            response = {'message': 'Cannot find this user!'}
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
 
 class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
