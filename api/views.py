@@ -38,6 +38,22 @@ class UserViewSet(viewsets.ModelViewSet):
             response = {'message': 'Cannot find this user!'}
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
+    @action(detail=True, methods=['POST'])
+    def change_password(self, request, pk=None):
+        try:
+            user = User.objects.get(id=pk)
+            current_password = request.data['currentPassword']
+            new_password = request.data['newPassword']
+            if not user.check_password(raw_password=current_password):
+                return Response({'message': 'Password not match!'}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                user.set_password(new_password)
+                user.save()
+                return Response({'message': 'Password changed successfully!'}, status=status.HTTP_204_NO_CONTENT)
+        except:
+            response = {'message': 'Cannot find this user!'}
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
 
 class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
