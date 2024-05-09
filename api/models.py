@@ -1,11 +1,18 @@
 import os
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 def get_upload_path(instance, file_name):
     return os.path.join('thumbnail', str(instance.pk), file_name)
+
+
+class User(AbstractUser):
+    avatar = models.ImageField(upload_to='avatars', blank=True)
+
+    def __str__(self):
+        return self.username
 
 
 class Movie(models.Model):
