@@ -16,11 +16,11 @@ class User(AbstractUser):
 
 
 class Movie(models.Model):
-    title = models.CharField(max_length=32)
+    title = models.CharField(max_length=64)
     description = models.TextField(max_length=1080)
     year = models.PositiveIntegerField(validators=[MinValueValidator(1900)], blank=True)
-    thumbnail = models.ImageField(upload_to=get_upload_path, blank=True, null=True)
-    type = models.CharField(max_length=128, blank=True)
+    thumbnail = models.CharField(max_length=256)
+    type = models.TextField(blank=True)
     trailer_url = models.CharField(max_length=512, blank=True)
 
     def __str__(self):
