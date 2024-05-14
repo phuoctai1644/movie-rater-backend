@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import Movie, Rating
-from django.contrib.auth.models import User
+from .models import Movie, Rating, User
 from rest_framework.authtoken.models import Token
+import json
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -20,6 +20,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class MovieSerializer(serializers.ModelSerializer):
+    type = serializers.SerializerMethodField(source='get_type')
+
+    def get_type(self, obj):
+        return json.loads(obj.type)
+
     class Meta:
         model = Movie
         fields = ('id', 'title', 'description', 'year', 'total_rating', 'avg_rating', 'thumbnail', 'type', 'trailer_url')
