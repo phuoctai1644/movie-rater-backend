@@ -5,13 +5,20 @@ from rest_framework.authtoken.models import Token
 
 
 class UserSerializer(serializers.ModelSerializer):
+    avatar = serializers.SerializerMethodField(source='get_avatar')
+
     class Meta:
         model = User
-        fields = ('id', 'username', 'password', 'first_name', 'last_name', 'email')
+        fields = ('id', 'username', 'password', 'first_name', 'last_name', 'email', 'avatar')
         extra_kwargs = {
             'password': {'write_only': True, 'required': True},
             'email': {'required': True}
         }
+
+    def get_avatar(self, obj):
+        request = self.context.get('request')
+        avatar = obj.avatar.url
+        return request.build_absolute_uri(avatar)
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)

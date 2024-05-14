@@ -9,7 +9,7 @@ def get_upload_path(instance, file_name):
 
 
 class User(AbstractUser):
-    avatar = models.ImageField(upload_to='avatars', blank=True)
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
 
     def __str__(self):
         return self.username

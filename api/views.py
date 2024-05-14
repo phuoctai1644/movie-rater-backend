@@ -16,7 +16,7 @@ class UserViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['GET'])
     def profile(self, request):
         user = User.objects.get(id=request.user.id)
-        serializer = UserSerializer(user, many=False)
+        serializer = UserSerializer(user, many=False, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def update(self, request, *args, **kwargs):
