@@ -152,7 +152,7 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
-    "https://mysite-s5zo.onrender.com/",
+    "https://mysite-jm96.onrender.com",
 ]
 
 # MEDIA
