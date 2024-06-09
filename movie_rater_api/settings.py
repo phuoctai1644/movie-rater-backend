@@ -155,7 +155,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://mysite-jm96.onrender.com",
 ]
 
-ALLOWED_HOSTS = ['52.41.36.82', '54.191.253.12', '44.226.122.3', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['mysite-jm96.onrender.com', '52.41.36.82', '54.191.253.12', '44.226.122.3', 'localhost', '127.0.0.1']
 
 # MEDIA
 MEDIA_ROOT = MEDIA_DIR
