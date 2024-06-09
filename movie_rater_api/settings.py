@@ -132,7 +132,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
-STATIC_ROOT = Path.joinpath(STATIC_URL, 'staticfiles')
+STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfilesgit ')
 
 if not DEBUG:
     # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
