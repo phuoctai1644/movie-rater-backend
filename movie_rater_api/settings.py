@@ -132,7 +132,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
-STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfilesgit ')
+STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfiles')
 
 if not DEBUG:
     # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
@@ -152,7 +152,7 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
-    "http://localhost:4500",
+    "https://mysite-s5zo.onrender.com/",
 ]
 
 # MEDIA
